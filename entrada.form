@@ -1,7 +1,7 @@
 formulario ~>>[
     <
-        tipo: "etiqueta",
-        valor: "Nombre:"
+        tipo: "eTiqueta",
+        valor: "Nombree:"
     >,
     <
         tipo: "texto",
@@ -24,3 +24,10 @@ formulario ~>>[
         evento: entrada
     >
 ]
+
+
+
+
+
+
+

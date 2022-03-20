@@ -1,13 +1,19 @@
+import sys
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
 import tkinter.font as tkFont
 from tkinter import filedialog
 from help import Leer_Archivo
+import webbrowser
 from Lexico import Analizador
 def boton_cargaArchivo_command():
     arch = Leer_Archivo()
     textt.insert(tk.INSERT, arch)
+
+def salir_interfaz():
+    sys.exit()
+
 
 def buscar_Repor():
     opcion = lista.get()
@@ -20,9 +26,12 @@ def buscar_Repor():
         lexico = Analizador(texto)
         lexico.reporteErorres()
     elif opcion == "Manual de Usuarios":
-        print("Manual de Usuarios")
+        webbrowser.open('Manual de Usuario.pdf') 
+        #print("Manual de Usuarios")
+
     elif opcion == "Manual Técnico":
-        print("Manual Técnico")
+        webbrowser.open('Manual Tecnico.pdf') 
+        #print("Manual Técnico")
     else:
         None
 
@@ -39,6 +48,9 @@ def analizar_Report():
     lexico = Analizador(texto)
     lexico.Imprimir()
     lexico.ImprimirErrores()
+    lexico.guardarDatos()
+    lexico.generacion()
+    
 
 
 
@@ -61,7 +73,12 @@ cArchivo["text"] = "Cargar archivo"
 cArchivo.place(x=75,y=10,width=121,height=50)
 cArchivo["command"] = boton_cargaArchivo_command 
 
-
+salir = tk.Button(root)
+salir["font"] = fuente
+salir["justify"] = "center"
+salir["text"] = "Salir del Sistema"
+salir.place(x=650,y=10,width=121,height=50)
+salir["command"] = salir_interfaz 
 
 guardar=tk.Button(root)
 guardar["font"] = fuente
