@@ -102,7 +102,7 @@ class Analizador:
                         i -= 1
                         continue
                     else:
-                        self.AgregarToken(tipos.DESCONOCIDO)
+                        self.AgregarToken(tipos.PALABRAS)
                         i -= 1
                         continue   
 
@@ -346,90 +346,107 @@ class Analizador:
         f.close()
     
     def generacion(self):
-        print("formulario creado")
-        f = open('Formulario.html','w')
-        f.write("<!doctype html>")
-        f.write("<html lang=\"en\">")
-        f.write("<head>")
-        f.write("<!-- Required meta tags -->")
-        f.write(" <meta charset=\"utf-8\">")
-        f.write("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">")
-        f.write("<!-- Bootstrap CSS -->")
-        f.write("<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We\" crossorigin=\"anonymous\">")
-        f.write("<title>Formulario</title>")
-        f.write("</head>")
-        f.write("<script>")
-        f.write("function Mostrar(){")
-        f.write("alert('Info')")
+        if self.generar:
+            print("formulario creado")
+            f = open('Formulario.html','w')
+            f.write("<!doctype html>")
+            f.write("<html lang=\"en\">")
+            f.write("<head>")
+            f.write("<!-- Required meta tags -->")
+            f.write(" <meta charset=\"utf-8\">")
+            f.write("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">")
+            f.write("<!-- Bootstrap CSS -->")
+            f.write("<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We\" crossorigin=\"anonymous\">")
+            f.write("<title>Formulario</title>")
+            f.write("<style>"
+                "@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');"      
 
-        f.write("}")
-        f.write("</script>")
-        f.write("<body>")
-        f.write("<H1 style=\"color:white; background-color:teal\">\n<center> Formulario </center>\n</H1>\n")
-        f.write("<ul><center>")
-        for x in range(len(self.lista)):
-            if self.lista[x].tipo == "etiqueta":
-                f.write("<li><label>"+self.lista[x].valor+"</label></li><br>")
-            if self.lista[x].tipo == "texto":
-                f.write("<li>")
-                if self.lista[x].valor != "":
-                    f.write("<label>"+self.lista[x].valor+" </label>")
-                else:
-                    None
-                f.write("<input type='text' name='Name' placeholder = "+self.lista[x].fondo+"/><br>")
-                f.write("</li>")
-            if self.lista[x].tipo == "grupo-radio":
-                f.write("<li>")
-                if self.lista[x].nombre != "":
-                    f.write("<br><label>"+self.lista[x].nombre +" </label>")
-                else:
-                    None
-                o = self.lista[x].valores
-                for j in o:
-                    f.write("<input type='radio'>"+j)
-                f.write("</li>")
-            if self.lista[x].tipo == "grupo-option":
-                f.write("<li>")
-                if self.lista[x].nombre != "":
-                    f.write("<br><label>"+self.lista[x].nombre +": </label>")
-                else:
-                    None
-                o = self.lista[x].valores
-                f.write("<select >")
-                for j in o:
-                    f.write("<option>"+j+"</option>")
-                f.write("</select>")
-                f.write("</li>")
-            if self.lista[x].tipo == "boton":
-                f.write("<li>")
-                if self.lista[x].evento == "entrada":
-                    f.write("<br><button id='open'>"+self.lista[x].valor+"</button>")
-                    f.write("<div id='modal_container' class='modal-container'>")
-                    f.write("<div class='modal'>")
-                    f.write("<h1>Ventana Modal</h1>")
-                    f.write("<p>")
-                    f.write(self.var_aux)
-                    f.write("</p>")
-                    f.write("<button id='close'>Cerrar</button>")
-                    f.write("</div>")
-                    f.write("</div>")
-                elif self.lista[x].evento == "info":
-                    f.write("<button onclick='Mostrar();'>"+ self.lista[x].valor +"</button>")
-                f.write("</li>")
-                f.write("</li>")
-        f.write("</ul></center>")
-        f.write("<!-- Optional JavaScript; choose one of the two! -->")
-        f.write("<tr class=\"table-primary\">")
-        f.write(" <!-- Option 1: Bootstrap Bundle with Popper -->")
-        f.write("<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js\" integrity=\"sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj\" crossorigin=\"anonymous\"></script>")
-        f.write("<!-- Option 2: Separate Popper and Bootstrap JS -->")
-        f.write(" <!--")
-        f.write("<script src=\"https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js\" integrity=\"sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp\" crossorigin=\"anonymous\"></script>")
-        f.write("<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js\" integrity=\"sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/\" crossorigin=\"anonymous\"></script>")
-        f.write("-->")
-        f.write("<script src='script.js'></script>")
-        f.write("</body>")
-        f.write("</html>")
-        self.lista.clear()
-        f.close()
+                "* {"
+                "box-sizing: border-box;"
+                "}"
+                "body {background-color: #edeef6;font-family: 'Poppins', sans-serif;display: flex;align-items: center;justify-content: center;min-height: 100vh;margin: 0;}"
+                "h1 {background-color: #87DABF;}"
+                "table, th, td {border: 1px solid black; text-align: center}"
+                "form { margin: 0 auto; width: 400px;padding: 1em;border: 1px solid #CCC; border-radius: 1em;}"
+                "ul {list-style: none;padding: 5;margin: 10;}"
+                "form li + li {margin-top: 1em;}"
+                "label {display: inline-block;width: 90px;text-align: right;}"
+                "input:focus,textarea:focus {border-color: #000;}"
+                "button {background-color: #47a386;border: 0;border-radius: 5px;box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);color: #fff;font-size: 14px;padding: 10px 25px;}"
+                ".modal-container {display: flex;background-color: rgba(0, 0, 0, 0.3);align-items: center;justify-content: center;position: fixed;pointer-events: none;opacity: 0;  top: 0;left: 0;height: 100vh;width: 100vw;transition: opacity 0.3s ease;}"
+                ".show {pointer-events: auto;opacity: 1;}"
+                ".modal {background-color: #fff;width: 600px;max-width: 100%;padding: 30px 50px;border-radius: 5px;box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);text-align: center;}"
+                ".modal h1 {margin: 0;}"
+                ".modal p {opacity: 0.7;font-size: 14px;}"
+                "</style>")
+            f.write("</head>")
+            f.write("<script>")
+            f.write("function Mostrar(){")
+            f.write("var nombre = document.getElementById('name').value;")
+            f.write("var selec = document.getElementById('prueba').value;")
+            #f.write("for(var i = 0; i <document.nose[i].value;")
+            f.write("var op = document.getElementById('hola').value;")
+            f.write("alert(nombre+' '+selec+' '+op)")
+            f.write("}")
+            f.write("</script>")
+            f.write("<body>")
+            f.write("<H1 style=\"color:white; background-color:teal\">\n<center> Formulario </center>\n</H1>\n")
+            f.write("<ul><center>")
+            for x in range(len(self.lista)):
+                if self.lista[x].tipo == "etiqueta":
+                    f.write("<li><label>"+self.lista[x].valor+"</label></li><br>")
+                if self.lista[x].tipo == "texto":
+                    f.write("<li>")
+                    if self.lista[x].valor != "":
+                        f.write("<label>"+self.lista[x].valor+" </label>")
+                    else:
+                        None
+                    f.write("<input type='text' name='Name' id='name' placeholder = "+self.lista[x].fondo+"/><br>")
+                    f.write("</li>")
+                if self.lista[x].tipo == "grupo-radio":
+                    f.write("<li>")
+                    if self.lista[x].nombre != "":
+                        f.write("<br><label>"+self.lista[x].nombre +" </label>")
+                    else:
+                        None
+                    o = self.lista[x].valores
+                    for j in o:
+                        f.write("<input type='radio' name='nose'>"+j)
+                    f.write("</li>")
+                if self.lista[x].tipo == "grupo-option":
+                    f.write("<li>")
+                    if self.lista[x].nombre != "":
+                        f.write("<br><label>"+self.lista[x].nombre +": </label>")
+                    else:
+                        None
+                    o = self.lista[x].valores
+                    f.write("<select id='prueba'>")
+                    for j in o:
+                        f.write("<option>"+j+"</option>")
+                    f.write("</select>")
+                    f.write("</li>")
+                if self.lista[x].tipo == "boton":
+                    f.write("<li>")
+                    if self.lista[x].evento == "entrada":
+                        f.write("<br><button id='open'>"+self.lista[x].valor+"</button>")
+                        f.write("<div id='modal_container' class='modal-container'>")
+                        f.write("<div class='modal'>")
+                        f.write("<h1>Ventana Modal</h1>")
+                        f.write("<p>")
+                        f.write(self.var_aux)
+                        f.write("</p>")
+                        f.write("<button id='close'>Cerrar</button>")
+                        f.write("</div>")
+                        f.write("</div>")
+                    elif self.lista[x].evento == "info":
+                        f.write("<button onclick='Mostrar();'>"+ self.lista[x].valor +"</button>")
+                    f.write("</li>")
+            f.write("</ul></center>")
+            f.write("<script src='script.js'></script>")
+            f.write("</body>")
+            f.write("</html>")
+            self.lista.clear()
+            f.close()
+        else:
+            print("No se ha generado el formulario")
     
