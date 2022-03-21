@@ -32,6 +32,8 @@ def buscar_Repor():
     elif opcion == "Manual Técnico":
         webbrowser.open('Manual Tecnico.pdf') 
         #print("Manual Técnico")
+    elif opcion == "AFD":
+        webbrowser.open("AFD.pdf")
     else:
         None
 
@@ -105,7 +107,7 @@ lista=ttk.Combobox(root)
 lista["state"]="readonly"
 lista["font"] = fuente
 lista["justify"] = "center"
-lista["values"] = ["Reporte Token", "Reporte Errores", "Manual de Usuarios", "Manual Técnico"]
+lista["values"] = ["Reporte Token", "Reporte Errores", "Manual de Usuarios", "Manual Técnico","AFD"]
 lista.place(x=650,y=350,width=130,height=30)
 
 analiza=tk.Button(root)

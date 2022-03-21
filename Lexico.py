@@ -9,8 +9,9 @@ class Analizador:
     columna = 1
     generar = False
     lista=[]
-
+    var_aux=''
     def __init__(self, entrada):
+        self.var_aux = entrada
         self.estado = 1
         self.lexema = ''
         self.tokens = []
@@ -246,6 +247,7 @@ class Analizador:
                 aux_tipo ='boton'
                 aux_valor = self.tokens[x+3].getLexema().replace('"',"")
                 aux_evento = self.tokens[x+6].getLexema().replace('"',"")
+                print(aux_evento)
                 self.lista.append(lista(aux_tipo,aux_valor,"","","",aux_evento))
 
 
@@ -356,24 +358,30 @@ class Analizador:
         f.write("<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We\" crossorigin=\"anonymous\">")
         f.write("<title>Formulario</title>")
         f.write("</head>")
+        f.write("<script>")
+        f.write("function Mostrar(){")
+        f.write("alert('Info')")
+
+        f.write("}")
+        f.write("</script>")
         f.write("<body>")
         f.write("<H1 style=\"color:white; background-color:teal\">\n<center> Formulario </center>\n</H1>\n")
         f.write("<ul><center>")
         for x in range(len(self.lista)):
             if self.lista[x].tipo == "etiqueta":
-                f.write("<li><label>"+self.lista[x].valor+"</label></li>")
+                f.write("<li><label>"+self.lista[x].valor+"</label></li><br>")
             if self.lista[x].tipo == "texto":
                 f.write("<li>")
                 if self.lista[x].valor != "":
                     f.write("<label>"+self.lista[x].valor+" </label>")
                 else:
                     None
-                f.write("<input type='text' name='Name' placeholder = "+self.lista[x].fondo+"/>")
+                f.write("<input type='text' name='Name' placeholder = "+self.lista[x].fondo+"/><br>")
                 f.write("</li>")
             if self.lista[x].tipo == "grupo-radio":
                 f.write("<li>")
                 if self.lista[x].nombre != "":
-                    f.write("<label>"+self.lista[x].nombre +" </label>")
+                    f.write("<br><label>"+self.lista[x].nombre +" </label>")
                 else:
                     None
                 o = self.lista[x].valores
@@ -383,7 +391,7 @@ class Analizador:
             if self.lista[x].tipo == "grupo-option":
                 f.write("<li>")
                 if self.lista[x].nombre != "":
-                    f.write("<label>"+self.lista[x].nombre +": </label>")
+                    f.write("<br><label>"+self.lista[x].nombre +": </label>")
                 else:
                     None
                 o = self.lista[x].valores
@@ -395,18 +403,20 @@ class Analizador:
             if self.lista[x].tipo == "boton":
                 f.write("<li>")
                 if self.lista[x].evento == "entrada":
-                    f.write("<button id='open'>"+self.lista[x].valor+"</button>")
+                    f.write("<br><button id='open'>"+self.lista[x].valor+"</button>")
                     f.write("<div id='modal_container' class='modal-container'>")
                     f.write("<div class='modal'>")
                     f.write("<h1>Ventana Modal</h1>")
                     f.write("<p>")
-                    #f.write(self.entrada2)
+                    f.write(self.var_aux)
                     f.write("</p>")
                     f.write("<button id='close'>Cerrar</button>")
                     f.write("</div>")
                     f.write("</div>")
+                elif self.lista[x].evento == "info":
+                    f.write("<button onclick='Mostrar();'>"+ self.lista[x].valor +"</button>")
                 f.write("</li>")
-
+                f.write("</li>")
         f.write("</ul></center>")
         f.write("<!-- Optional JavaScript; choose one of the two! -->")
         f.write("<tr class=\"table-primary\">")
@@ -417,6 +427,7 @@ class Analizador:
         f.write("<script src=\"https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js\" integrity=\"sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp\" crossorigin=\"anonymous\"></script>")
         f.write("<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js\" integrity=\"sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/\" crossorigin=\"anonymous\"></script>")
         f.write("-->")
+        f.write("<script src='script.js'></script>")
         f.write("</body>")
         f.write("</html>")
         self.lista.clear()
